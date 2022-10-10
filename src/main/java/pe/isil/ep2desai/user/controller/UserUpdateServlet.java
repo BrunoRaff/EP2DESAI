@@ -30,6 +30,8 @@ public class UserUpdateServlet extends HttpServlet {
         UserDao userUpdateDao = new UserDao();
         String mensaje="";
         
+        
+        
         String alu_id = request.getParameter("alu_id");
         String alu_nombre = request.getParameter("alu_nombre");
         String alu_usuario = request.getParameter("alu_usuario");
@@ -39,6 +41,8 @@ public class UserUpdateServlet extends HttpServlet {
         String alu_email = request.getParameter("alu_email");
    
         
+        
+    
         User user = new User();   
         user.setAlu_id(Integer.parseInt(alu_id));
         user.setAlu_nombre(alu_nombre);
@@ -51,10 +55,12 @@ public class UserUpdateServlet extends HttpServlet {
         try{
             mensaje = userUpdateDao.updateUser(user);
             
+            
         }catch(Exception e){
             mensaje=e.toString();
             e.printStackTrace();
         }
+        
         
   
         RequestDispatcher dispatcher = request.getRequestDispatcher("/success.jsp");
