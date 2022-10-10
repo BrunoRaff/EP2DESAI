@@ -1,4 +1,3 @@
-
 package pe.isil.ep2desai.user.dao;
 
 import java.sql.Connection;
@@ -75,7 +74,25 @@ public class UserDao {
         return message;
         
     }
+     
+      public String deleteUser(User user) throws Exception{
+        String message= "";
+        MysqlConnection mysqConn = new MysqlConnection();
+        Connection conn = mysqConn.getConnection();
+        int rowsAffected = 0;
+        PreparedStatement  ps = conn.prepareStatement("DELETE FROM ALUMNO where alu_id=?");
+        ps.setInt(1, user.getAlu_id());
+        
+       rowsAffected = ps.executeUpdate();
+        if(rowsAffected>0){
+                message="Se elimino el usuario satisfactoriamente";
+            }else{
+                message="Alumno no existe";
+            }
+        
+        return message;
+    }
+     
+     
     
 }
-
-

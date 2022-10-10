@@ -74,17 +74,35 @@ public class UserDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+      
+        
+        
+        
+        UserDao userDeleteDao = new UserDao();
+        String mensaje = "";
+        
+        String alu_id = request.getParameter("alu_id");
+   
+        User user = new User();   
+        user.setAlu_id(Integer.parseInt(alu_id));
+        
+         try{
+           
+            mensaje = userDeleteDao.deleteUser(user);
+            
+            
+        }catch(Exception e){
+            mensaje=e.toString();
+            e.printStackTrace();
+        }
+         
+          RequestDispatcher dispatcher = request.getRequestDispatcher("/success.jsp");
+        
+        request.setAttribute("message", mensaje);
+        
+        dispatcher.forward(request,response);
+    }   
+    
+   
 
 }
